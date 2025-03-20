@@ -16,6 +16,7 @@ import numpy as np
 import xarray as xr
 import json
 import collections
+import os
 
 ### FOLDERS ###
 JSON_path = '/Users/Tigge006/surfdrive/04_Scripts/Python/IMAU-IceEddie/JSON formats/' 
@@ -63,6 +64,10 @@ def Add_dataset_attributes(ds,JSON_type):
     Open attributes in a JSON file and add attributes to the dataset, and to all it's known variables 
     '''
     file      = JSON_path + JSON_type
+    if not os.path.isfile(file): 
+        print('JSON files not found, place them in the JSON_path directory set in utils.py')
+        ds.attrs = ''
+        return ds
     attr_dict = read_ordered_json(file)
     ds.attrs  = attr_dict.pop('attributes')
     

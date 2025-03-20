@@ -2890,6 +2890,11 @@ def L1B_to_EBM(nml):
     luse_RHraw = nml['AWS_to_SEB']['luse_RHraw']
     luse_SWdraw = nml['AWS_to_SEB']['luse_SWdraw']
 
+
+    if L1Bdir == '/L1B/':
+        L1Bdir = os.path.dirname(__file__) + '/' + LOC + '/' + ID + '/L1B/'
+        print('Using default L1B folder: ' + L1Bdir)
+
     os.chdir(L1Bdir)
     
     fid = 0
@@ -3074,6 +3079,11 @@ def L1B_to_snowpack(nml):
     TSG = nml['AWS_to_SEB']['TSG']
     AWSfile = nml['AWScorr']['file_AWS_locations']
 
+
+    if L1Bdir == '/L1B/':
+        L1Bdir = os.path.dirname(__file__) + '/' + LOC + '/' + ID + '/L1B/'
+        print('Using default L1B folder: ' + L1Bdir)
+        
     os.chdir(L1Bdir)
     file = (glob.glob('*L1B*' + "*nc"))[0]
     ds = xr.open_dataset(file)
@@ -3486,16 +3496,19 @@ def L0toL1A(nml):
  
     yyyymmdd_start = nml['AWScorr']['yyyymmdd_start']
     yyyymmdd_end = nml['AWScorr']['yyyymmdd_end']
-    
+
+    if not L0dir:
+        L0dir = os.path.dirname(__file__) + '/' + LOC + '/' + ID + '/L0/'
+        print('Using default L0 folder: ' + L0dir)
+    os.chdir(L0dir) 
+
+    if L1Adir == 'L1A/':
+        L1Adir = os.path.dirname(__file__) + '/' + LOC + '/' + ID + '/L1A/'
+        print('Using default L1A folder: ' + L1Adir)
+
     if not os.path.exists(L1Adir):
         os.makedirs(L1Adir) 
-        
-    # Move to input data directory
-    if not L0dir:
-        os.chdir(os.getcwd())  
-    else:
-        os.chdir(L0dir)  
-    print(os.getcwd())
+
         
     if Input_fname == 'fluxstation18':
         file =  sorted(glob.glob("*fluxstation.txt"), key=lambda x: x[1:])   
@@ -4397,16 +4410,17 @@ def L1AtoL1B(nml):
     sensor_height = nml['AWScorr']['sensor_height']
 
                                
+    
+    if L1Adir == 'L1A/':
+        L1Adir = os.path.dirname(__file__) + '/' + LOC + '/' + ID + '/L1A/'
+        print('Using default L1A folder: ' + L1Adir)
+    if L1Bdir == 'L1B/':
+        L1Bdir = os.path.dirname(__file__) + '/' + LOC + '/' + ID + '/L1B/'
+        print('Using default L1B folder: ' + L1Bdir)
     if not os.path.exists(L1Bdir):
         os.makedirs(L1Bdir) 
-        
-    # Move to input data directory
-    if not L1Adir:
-        os.chdir(os.getcwd())  
-    else:
-        os.chdir(L1Adir)  
-        
- 
+
+    os.chdir(L1Adir)  
 
     files = sorted(glob.glob("*L1A*nc"))
     for fid in range(len(files)):
