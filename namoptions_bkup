@@ -1,0 +1,218 @@
+#!/bin/bash
+&GLOBAL
+DIR				= ''
+L0dir			= ''
+L1B_30min_dir   = ''
+L2_30min_dir    = ''
+LOC				= ''
+ID				= ''
+sensor  	    = ''
+version			= ''
+input_type		= ''
+signature		= ''
+institute 		= ''
+lL0toL2         = .false.
+lL0toL1A	    = .false.
+lmergeL1A		= .false.
+lmergeL3		= .false.
+lL1AtoL1B		= .true.
+lL1BtoL2	    = .false.
+l2toL3	     	= .false.
+l3toL3B	     	= .false.
+lL1B_to_EBM     = .false.
+lL1B_to_snowpack = .false. 
+lEBM_to_csv     = .false.
+lEBM_AWS_to_csv     = .false.
+L1B_to_grl_awsID = .false.
+lav_csv = .false.
+/
+
+&AWScorr
+DIR				= ''
+L1B_precip_dir  = ''
+L1B_WS_dir      = ''
+L1B_RH_dir      = ''
+L0dir			= ''
+L0_raddir		= ''
+Input_fname		= ''
+toffset_min     = 0
+d   			= 0.0
+H				= 0.0
+epsilon         = 0.
+lSvdB			= .true.
+z0_WD_table     = 
+lmetafile       = .true.
+lcalCNR4        = .false.
+lSMB            = .true.
+SMB             = 'daily'
+lsolar          = .true.
+lcorr_lwheating = .false.
+pcorr_lwheating = 0.00 0.00
+lcorr_SWcoldbias = .false.
+pcorr_SWu_coldbias = 0.00 0.00
+pcorr_SWd_coldbias = 0.00 0.00
+lconvert_final  = .false.
+ldownsample     = .false.
+pu              = 0.00 0.00 0.00
+pl              = 0.00 0.00 0.00
+zrange          = 1.0 3.0
+yyyymmdd_start  = "1995-01-01"
+yyyymmdd_end    = "2025-01-01"
+zfill           = 4.0
+lcorrect_SWd    = .false.
+lfilter_height_histogram = .false.
+l_correctRH     = .false.
+zsnow_start     = 0.0
+ldrop_ABL       = .false.
+zm_factor       = 1.
+alb_ice_certain = 0.0
+p0_constant     = 1000
+EBMdir          = ''
+EBMdir2          = ''
+L1B_REF_dir     = ''
+tref_start      = ""
+tref_end        = ""
+lshift_time_EBM = 0
+lref_method     = ''
+lref_method_var = 's'
+sensor_height = ''
+csvdir = ''
+file_aws_locations = ''
+heights_dir = ''
+L3B_dir = ''
+toffset_min_l3b = 0
+/
+
+&AWS_to_SEB
+zfill           = 4.0
+z0fill          = 1e-4
+yyyymmdd_start  = "1995-01-01"
+yyyymmdd_end    = "2025-01-01"
+l3sensor = ''
+WD_valid = 0. 360.
+lSWdcorr = .false.
+lSWucorr = .false.
+lalbcorr = .true.
+lzfixed = .false.
+zfixed =  4.0
+lperturb_alb = .false.
+perturb_alb = -0.02
+z_snow = 0.
+dT = '1H'
+serie = 'surface_level_zm'
+luse_LWraw  = .false.
+lcorr_dL  = .false. 
+luse_Traw = .false.
+luse_RHraw = .false.
+luse_SWdraw  = .false.
+TSG = 249.1077
+/
+
+&L0toL1A
+toffset_method  = 'min'
+toffset         = 0
+WDoffset   		= 0
+WDoffset_iWS   	= 0
+WDoffset_CSAT	= 0
+frequency    	= '0.1S'
+Gillfactor	    = 1.25
+Youngfactor     = 1
+fnameprefix     = TOA5
+sensorname      = 'CSAT'
+ifiletype      = 'TOA'
+headers        = ""
+yearstart      = 2021
+lreplace_24h = .false.
+/
+
+&L1AtoL1B
+dT		    	= '30min'
+WDvalid    	 	= 0 360
+frequency   	= 10
+ldownsample     = .false.
+lrolling        = .false.
+laverage        = .false.
+shift_w_sample = 0
+Fd				= '4S'
+maxnanp         = 5
+Rotation 		= 'DR'
+dT_PF 		= '1M'
+qMAD			= 7
+LoopsMAD	    = 1
+maxdiag        = 100
+/
+
+&L1BtoL2
+dT		    	= '30min'
+WDvalid    	 	= 0 360
+inputdata		= L1B
+lwritespectra   = .false.
+spectra         = 'Kaimal'
+freq_range		= 'Wide'
+lheightinfile   = .false.
+lfixedheight    = .false.
+EC_hgt_offset   = 0.0
+z			 	= 4.00
+H				= 0.0
+d				= 0.0
+lcorrH          = .true.
+ignore_samples_rhs = 0
+ldetrend     	= .false.
+lhighpass		= .true.
+Tsensor         = 'T1'
+/
+
+&L2toL3
+dT		    	= '30min'
+WDoffset   		= 0
+toffset_min     = 0
+lfixedheight    = .false.
+EC_hgt_offset   = 0.0
+lcorrH          = .true.
+ldetrend    	= .false.
+lhighpass		= .true.
+spectra     	= 'Kaimal'
+freq_range		= 'Wide'
+Aw				= 0.45
+Lu				= 1.78
+tauT			= 0.13
+tau_wT          = 0.2
+tau_uw          = 0.5
+ldtau			= .false.
+dAw 			= 0.10
+dLu				= 0.2
+dtauT			= 0.04
+suw				= 0.5
+swT				= 0.0
+swq  			= 0.25
+pw				= 0.12
+pu				= 0.12
+pT				= 0.12
+pq				= 0.125
+lshadowing		= .false.
+lwpl			= .true.
+lwpl_method     = 'L2'
+lsnd			= .true.
+lsnd_method     = 'L1B'
+lsidewind       = .false.
+lsidewind_method = 'Schotanus1983'
+CESAR_dir       = ''
+nitera          = 1
+Tsensor         = 'T1'
+/
+
+
+&L3toL3B
+L3sensor    = 'CSAT'
+lfp         = .false.
+fp_domain   = -500 500 -500 500
+lbin_WD     = .false.
+fp_dx       = 5
+fp_WDbins   = 0 360
+fp_dWDbins  = 22.5
+fp_r        = 10 50 80
+lsave_all_fp = .false.
+toffset_min = 0
+EC_hgt_offset   = 0
+ldownsample = .false.
+/
