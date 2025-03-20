@@ -1,0 +1,7 @@
+*.nc
+*.pyc
+.DS_store
+
+.vscode
+.env
+.DS_Store

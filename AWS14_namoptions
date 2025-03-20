@@ -1,0 +1,107 @@
+#!/bin/bash
+&GLOBAL
+DIR				= ''
+L0dir			= ''
+L1B_30min_dir   = ''
+L2_30min_dir    = ''
+LOC				= 'ANT'
+ID				= 'AWS14'
+sensor  	    = 'ANT_AWS_Paul'
+version			= '1.0'
+input_type		= 'WS'
+lL0toL2         = .false.
+lL0toL1A	    = .true.
+lmergeL1A		= .false.
+lmergeL3		= .false.
+lL1AtoL1B		= .true.
+lL1BtoL2	    = .false.
+l2toL3	     	= .false.
+l3toL3B	     	= .false.
+lL1B_to_EBM     = .true.
+lL1B_to_snowpack = .true. 
+lEBM_to_csv     = .false.
+lEBM_AWS_to_csv     = .false.
+L1B_to_grl_awsID = .false.
+lav_csv = .false.
+/
+
+&AWScorr
+DIR				= '/ANT/AWS14/'
+L1B_precip_dir  = ''
+L1B_WS_dir      = ''
+L1B_RH_dir      = ''
+L0dir			= 'L0/'
+L0_raddir		= ''
+Input_fname		= 'AWS_yearly_Paul_corr_v6'
+toffset_min     = 0
+d   			= 0.0
+H				= 0.0
+epsilon         = 0.
+lSvdB			= .true.
+z0_WD_table     = 
+lmetafile       = .true.
+lcalCNR4        = .false.
+lSMB            = .true.
+SMB             = 'daily'
+lsolar          = .true.
+lcorr_lwheating = .false.
+pcorr_lwheating = 0.0100  2.3853
+lcorr_SWcoldbias = .true.
+pcorr_SWu_coldbias = -0.0133    4.6117
+pcorr_SWd_coldbias =  0.0091    3.2649
+lconvert_final  = .false.
+ldownsample     = .false.
+pu              = -0.0085    2.9618  304.9879
+pl              = 0.0453    3.9514  227.3860
+zrange          = 1.0 3.0
+yyyymmdd_start  = "2015-01-26"
+yyyymmdd_end    = "2015-12-31"
+zfill           = 2.65
+lcorrect_SWd    = .false.
+lfilter_height_histogram = .false.
+l_correctRH     = .false.
+zsnow_start     = 0.0
+ldrop_ABL       = .false.
+zm_factor       = 1.
+alb_ice_certain = 0.0
+p0_constant     = 980
+EBMdir          = ''
+EBMdir2          = '/'
+L1B_REF_dir     = '/'
+tref_start      = ""
+tref_end        = ""
+lshift_time_EBM = 1
+lref_method     = ''
+lref_method_var = ''
+sensor_height = 'surface_level_zm'
+csvdir = ''
+file_aws_locations = ''
+heights_dir = ''
+L3B_dir = ''
+toffset_min_l3b = 0
+/
+
+&AWS_to_SEB
+zfill           = 2.65
+z0fill          = 1e-4
+yyyymmdd_start  = "2015-01-26"
+yyyymmdd_end    = "2015-12-31"
+l3sensor = ''
+WD_valid = 0. 360.
+lSWdcorr = .false.
+lSWucorr = .false.
+lalbcorr = .true.
+lzfixed = .false.
+zfixed =  2.65
+lperturb_alb = .false.
+perturb_alb = -0.02
+z_snow = 5.
+dT = '1H'
+serie = 'surface_level_zm'
+luse_LWraw  = .false.
+luse_Traw = .false.
+luse_RHraw = .false.
+luse_SWdraw = .false.
+lcorr_dL  = .false.
+TSG =  258.9592
+/
