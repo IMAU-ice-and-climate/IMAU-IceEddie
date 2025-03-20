@@ -1,5 +1,5 @@
 
-![image info](./media/Eddie.png)
+![image info](./Media/Eddie.png)
 *Eddie, from the Ice Age movie*
 
 # IMAU-IceEddie
@@ -37,7 +37,7 @@ Eddy covariance and AWS data can be merged to the same dataset:
 - ```L3B``` : merged AWS and eddy covariance data, possibly including additional calculation such as fetch footprints
 
 The code contains functions to process data from one level to a higher level.
-![image info](./media/Code_Structure.png)
+![image info](./Media/Code_Structure.png)
 
 
 ## Supported data
