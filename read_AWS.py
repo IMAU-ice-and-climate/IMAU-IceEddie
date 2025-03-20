@@ -17,15 +17,11 @@ import numpy as np
 import itertools
 import xarray as xr
 import datetime
-import pysolar
 import read_EC as rec
 import utils 
 import Bulk_turbulence as bulk
 import calc_footprint_FFP_climatology as fp_clim
-import pytz
 from scipy import stats 
-import csv
-import sys
 from functools import reduce
 import re
 import suncalc
