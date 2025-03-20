@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-            
+          
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -37,12 +37,11 @@ jobs:
         run: |
           python IceEddie.py
       
-      - name: Check if output file is created
+      - name: Check if L1B folder is not empty
         run: |
-          OUTPUT_DIR="ANT/AWS/L1B/"  # Adjust to match your script's output directory
-          if [ -d "$OUTPUT_DIR" ] && [ "$(ls -A $OUTPUT_DIR)" ]; then
-            echo "Test passed: Output files found."
-          else
-            echo "Test failed: No output files found."
+          if [ -z "$(ls -A ANT/AWS14/L1B/)" ]; then
+            echo "L1B folder is empty!"
             exit 1
+          else
+            echo "L1B folder contains files."
           fi
