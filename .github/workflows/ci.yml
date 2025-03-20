@@ -1,0 +1,48 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.0'  # Adjust as needed
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # If dependencies are needed
+
+      - name: Copy namoptions for this test
+        run: cp AWS14_namoptions namoptions 
+        
+      - name: Run IceEddie script
+        run: |
+          python IceEddie.py
+      
+      - name: Check if output file is created
+        run: |
+          OUTPUT_DIR="ANT/AWS/L1B/"  # Adjust to match your script's output directory
+          if [ -d "$OUTPUT_DIR" ] && [ "$(ls -A $OUTPUT_DIR)" ]; then
+            echo "Test passed: Output files found."
+          else
+            echo "Test failed: No output files found."
+            exit 1
+          fi
