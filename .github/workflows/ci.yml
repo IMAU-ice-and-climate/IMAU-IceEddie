@@ -39,7 +39,7 @@ jobs:
       
       - name: Check if output file is created
         run: |
-          OUTPUT_DIR="ANT/AWS/L1B/"  # Adjust to match your script's output directory
+          OUTPUT_DIR="/ANT/AWS14/L1B/"  # Adjust to match your script's output directory
           if [ -d "$OUTPUT_DIR" ] && [ "$(ls -A $OUTPUT_DIR)" ]; then
             echo "Test passed: Output files found."
           else
