@@ -12,6 +12,7 @@ dependencies:
   - cftime>=1.6.2
   - f90nml>=1.4.4
   - pandas>=2.1.1 
+  - bottleneck
   - pip:
     - suncalc>=0.1.3
 
