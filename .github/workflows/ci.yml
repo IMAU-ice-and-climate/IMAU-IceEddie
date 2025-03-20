@@ -20,9 +20,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+            
       - name: Set up Miniconda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         with:
           miniconda-version: "latest"
           activate-environment: test-env
@@ -33,6 +33,7 @@ jobs:
         run: cp AWS14_namoptions namoptions 
         
       - name: Run IceEddie script
+        shell: bash -el {0}
         run: |
           python IceEddie.py
       
