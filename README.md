@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15058515.svg)](https://doi.org/10.5281/zenodo.15058515)
 
 ![image info](./Media/Eddie.png)
 *Eddie, from the Ice Age movie*
