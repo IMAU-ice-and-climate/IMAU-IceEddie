@@ -24,6 +24,7 @@ jobs:
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v2
         with:
+          miniconda-version: "latest"
           activate-environment: test-env
           environment-file: environment.yml
           auto-activate-base: false
